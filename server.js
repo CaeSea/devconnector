@@ -4,8 +4,10 @@ const connectDb = require('./config/db');
 const app = express();
 connectDb();
 
-app.get('/', (req, res) => res.send('Hello there!'));
+// Middleware
+app.use(express.json({ extended: false }));
 
+app.get('/', (req, res) => res.send('Hello there!'));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
