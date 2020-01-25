@@ -135,6 +135,64 @@ router.get('/user/:user_id', async (req, res) => {
   }
 });
 
+// @route    PUT api/profile/experience
+// @desc     Add profile experience
+// @access   Private
+router.put(
+  '/experience',
+  [
+    auth,
+    [
+      check('title', 'Please enter a title')
+        .not()
+        .isEmpty(),
+      check('company', 'Please enter the name of the company')
+        .not()
+        .isEmpty(),
+      check('from', 'Please enter the date which you started')
+        .not()
+        .isEmpty()
+    ]
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array });
+    }
+
+    const {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description
+    } = req.body;
+
+    const newExp = {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description
+    };
+
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
+      profile.experience.unshift(newExp);
+
+      await profile.save();
+      res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Internal Server Error');
+    }
+  }
+);
+
 // @route    DELETE api/profile
 // @desc     Delete profile, user & posts
 // @access   Private
