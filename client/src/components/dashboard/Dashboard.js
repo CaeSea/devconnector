@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
 import DashboardActions from './DashboardActions';
+import Experience from './Experience';
+import Education from './Education';
 import { getCurrentProfile } from '../../actions/profile';
 
 const Dashboard = ({
@@ -25,7 +27,11 @@ const Dashboard = ({
         Welcome {user && user.name}
       </p>
       {profile !== null ? (
-        <DashboardActions />
+        <Fragment>
+          <DashboardActions />
+          <Experience experience={profile.experience} />
+          <Education education={profile.education} />
+        </Fragment>
       ) : (
         <Fragment>
           <p>You have not yet completed your profile information.</p>
