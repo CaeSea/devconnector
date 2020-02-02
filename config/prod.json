@@ -1,6 +1,0 @@
-{
-  "mongoURI": "mongodb://admin:Rathalos456@ds061839.mlab.com:61839/devconnector",
-  "jwtSecret": "itsasecretsshhh",
-  "githubClientId": "9bfc93691672a2e8043c",
-  "githubSecret": "e14b31346b93a6cc3f74b9b9a73ce9fc25b44fa6"
-}
