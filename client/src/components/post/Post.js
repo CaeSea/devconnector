@@ -6,6 +6,7 @@ import Spinner from '../layout/Spinner';
 import PostItem from '../posts/PostItem';
 import { getPost } from '../../actions/post';
 import CommentForm from './CommentForm';
+import CommentItem from './CommentItem';
 
 const Post = ({
   getPost,
@@ -27,6 +28,11 @@ const Post = ({
       </Link>
       <PostItem post={post} showActions={false} />
       <CommentForm id={post._id} />
+      <div className="comments">
+        {post.comments.map(com => (
+          <CommentItem key={com._id} comment={com} postId={post._id} />
+        ))}
+      </div>
     </Fragment>
   );
 };
